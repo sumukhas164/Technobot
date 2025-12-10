@@ -2,11 +2,7 @@
 
 TechnoBot is an advanced AI-driven technical assistant built using **Flask**, **Groq LLM**, and **FastMCP tools**.  
 It handles technical troubleshooting, performs multi-source research, and raises/reads tickets using a MySQL backend.  
-The system produces **clean, structured, step-by-step** LLM responses.
-
----
-
-##  Key Features
+The system produces **clean, strKey Features
 
 -  **Technical Query Solver**  
   Automatically uses MCP research tools (DuckDuckGo, Wikipedia, Research API) to answer queries.
