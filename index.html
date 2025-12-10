@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnoBot - AI Technical Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #000000;
+            border-bottom: 2px solid #ffffff;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .search-section {
+            background: #1a1a1a;
+            border: 2px solid #333333;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .search-section:hover {
+            border-color: #ffffff;
+            box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1);
+        }
+
+        .search-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: #000000;
+            border: 2px solid #333333;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #666666;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #666666;
+        }
+
+        .btn-secondary:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .results-section {
+            background: #1a1a1a;
+            border: 2px solid #333333;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-content {
+            color: #ffffff;
+            line-height: 1.8;
+        }
+
+        .results-content h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #333333;
+        }
+
+        .results-content h3 {
+            color: #cccccc;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .results-content pre {
+            background: #000000;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .results-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #000000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .results-content table th,
+        .results-content table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333333;
+        }
+
+        .results-content table th {
+            background: #0a0a0a;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .results-content table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-content table tr:hover {
+            background: #1a1a1a;
+        }
+
+        .results-content a {
+            color: #ffffff;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .results-content a:hover {
+            opacity: 0.7;
+        }
+
+        .results-content p {
+            margin: 0.75rem 0;
+            color: #cccccc;
+        }
+
+        .footer {
+            background: #000000;
+            border-top: 2px solid #333333;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: #666666;
+            font-size: 0.875rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #333333;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: #0a0a0a;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #ffffff;
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .feature-desc {
+            color: #999999;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .search-section,
+            .results-section {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <div class="logo">TechnoBot</div>
+                <div class="subtitle">AI-Powered Technical Assistant</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <h1 class="search-title">Ask Me Anything Technical</h1>
+            <form method="POST" class="search-form" id="queryForm">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        name="query"
+                        class="search-input"
+                        placeholder="Enter your technical query or ticket request..."
+                        value="{{ query }}"
+                        required
+                        autofocus
+                    >
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn" id="submitBtn">
+                        Search & Analyze
+                    </button>
+                    <button type="reset" class="btn btn-secondary" onclick="window.location.href='/'">
+                        Clear
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        {% if not result %}
+        <section class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎟️</div>
+                <div class="feature-title">Ticket Management</div>
+                <div class="feature-desc">Check ticket status and get AI-powered summaries with actionable insights.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">Deep Research</div>
+                <div class="feature-desc">Multi-source search combining resource databases and web searches.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">AI Analysis</div>
+                <div class="feature-desc">Structured technical analysis with step-by-step execution guidance.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Fast Response</div>
+                <div class="feature-desc">Optimized queries delivering comprehensive results in seconds.</div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if result %}
+        <section class="results-section">
+            <div class="results-content">
+                {{ result }}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 TechnoBot. Powered by AI and MCP Tools.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('queryForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function() {
+            submitBtn.innerHTML = 'Processing<span class="loading"></span>';
+            submitBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>
