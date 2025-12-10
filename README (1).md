@@ -6,26 +6,26 @@ The system produces **clean, structured, step-by-step** LLM responses.
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-- 🔍 **Technical Query Solver**  
+-  **Technical Query Solver**  
   Automatically uses MCP research tools (DuckDuckGo, Wikipedia, Research API) to answer queries.
 
-- 🛠️ **Troubleshooting Steps**  
+- **Troubleshooting Steps**  
   Delivers clear, step-by-step technical resolutions and command instructions.
 
-- 🎫 **Smart Ticketing System**  
+- **Smart Ticketing System**  
   Uses MySQL-based ticket tool **only when the query contains** “ticket” or “raise ticket”.
 
-- ⚡ **Fast Response Engine**  
+-  **Fast Response Engine**  
   Groq LLM + FastMCP tools = fast, accurate, structured responses.
 
-- 🎨 **Responsive Frontend**  
+-  **Responsive Frontend**  
   Flask + HTML/CSS/JS interface with incremental LLM output streaming.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 The project contains the following components:
 
@@ -51,17 +51,17 @@ The project contains the following components:
 
 ---
 
-## 📌 Architecture Flow Diagram  
+##  Architecture Flow Diagram  
 ![Architecture Diagram](path/to/architecture.jpg)
 
 ---
 
-## 🎬 Demo Video  
+##  Demo Video  
 [Demo Video Link Here]
 
 ---
 
-## 📸 Sample Output Screenshots  
+## Sample Output Screenshots  
 
 ![Sample Output 1](path/to/screenshot1.png)  
 ![Sample Output 2](path/to/screenshot2.png)  
@@ -69,15 +69,15 @@ The project contains the following components:
 
 ---
 
-# ⚙️ Installation
+#  Installation
 
-## 1️⃣ Clone the Project
+##  Clone the Project
 ```bash
 git clone https://github.com/your-username/technobot.git
 cd technobot
 ```
 
-## 2️⃣ Create Virtual Environment
+## Create Virtual Environment
 ```bash
 python -m venv venv
 ```
@@ -93,14 +93,14 @@ Linux/Mac:
 source venv/bin/activate
 ```
 
-## 3️⃣ Install Dependencies
+##  Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# 🔧 Environment Setup (.env)
+# Environment Setup (.env)
 
 ```ini
 GROQ_API_KEY=your_groq_key
@@ -113,7 +113,7 @@ MYSQL_DATABASE=technical_db
 
 ---
 
-# ▶️ Running the System
+#  Running the System
 
 ## Run MCP Server
 ```bash
@@ -132,15 +132,15 @@ http://127.0.0.1:5000
 
 ---
 
-# 🕹️ Usage Workflow
+#  Usage Workflow
 
-## ✔️ Technical Problem Query
+##  Technical Problem Query
 Example:
 ```
 docker image not running
 ```
 
-## ✔️ Ticket Query
+## Ticket Query
 Example:
 ```
 raise ticket for email issue
@@ -149,7 +149,7 @@ check ticket 102
 
 ---
 
-# 🧩 Technology Stack
+# Technology Stack
 
 | Component   | Technology |
 |------------|------------|
@@ -163,10 +163,10 @@ check ticket 102
 
 ---
 
-# 📄 License
+#  License
 MIT License © 2025
 
 ---
 
-# ❤️ Credits
+#  Credits
 Built by **Sumukha**
